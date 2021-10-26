@@ -1,4 +1,5 @@
-# This is the code for the song I uploaded to Bandcamp, and the synth settings file.
+# a1c4i1d
+This is the code for the song I uploaded to Bandcamp, and the synth settings file.
 https://hirokimatsui.bandcamp.com/track/a1c4i1d
 
 I used TidalCycles (https://tidalcycles.org/) to sequence the rhythm while controlling a Korg Minilogue XD and an Elektron Monomachine.
