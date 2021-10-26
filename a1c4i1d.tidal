@@ -1,0 +1,42 @@
+setcps 1.175
+
+do
+  -- all $(|* speed "1")
+  --unmute "mlxd"; unmute "mlxdmod";
+  unmute "mlxd"; unmute "mlxdmod";
+  unmute 1; mute 2; mute 3;
+  -- mute 1; mute 2; mute 3;
+  mute "mnm";
+  let osc1_level = 0 --"127 <60 40 [80 127]> 110 <80 127>"
+      osc2_level = 0 
+      osc3_level = 0
+  p "mlxd"
+    $whenmod 32 30 (|+ note (choose[12,-12,0,24]))
+    $rarely (|+ legato 0.125)
+    -- $ (|+ note "{0 12 0 0 24}%8")
+    $whenmod 8 6 ((density (slow 2 "1 1 1 2")) . (|* legato (slow 2 "1 1 1 0.5")))
+    $note ("0*8" - 12) #s "miniloguexd" #legato (choose[1,0.8,0.95,0.9,0.65])
+    |+ note "{0 1 <0 3 <14 10>>}%8"
+  p "mlxdmod" $stack[
+    ccn cutoff_mxd #ccv 50, ccn resonance_mxd #ccv 75,
+    -- ccn (fast 8 cutoff_mxd) #ccv (range 25 80 (slow 8 sine)), ccn (fast 8 resonance_mxd) #ccv (range 75 90 (slow 16 cosine)),  
+    while "t(<3 <5 6>>,8,<0 <0 2>>)" (#ccv osc1_level) $ccn (fast 8 gain1_mxd) #ccv "0",
+    while (slowcat[ "f t t f","<t(3,8) <t(5,8) [t f f f f]> >/2"])(#ccv osc2_level) $ccn (fast 8 gain2_mxd) #ccv "0",
+    while (slowcat["f <[t f] t> [f t] f","t(<3 5>,8)"]) (#ccv osc3_level) $ccn (fast 8 gain3_mxd) #ccv "0"] #s "miniloguexd"
+  -- dirt samples
+  d1
+    -- $someCyclesBy 0.18 (ply 4)
+    $sometimes (stutWith 4 0.125 (|* speed 1.25))
+    -- $whenmod 32 30 (|*gain (slow 2 "1 0!16"))
+    $chunk 4 (hurry 2)
+    $jux (|* speed "1.055555")
+    $n "0 [4 0?] 2 <0*2 0>" #s "rx15!3 <909hh <909hh 909oh>>" #shape 0.88
+    #gain 0.9 |* gain (range 0.9 0.8 rand) #legato 2
+  d2 $s "<arbt(<1>,8) ~>"
+  d3 $slowcat[s "~",slowcat[
+      s "~ arcp*2 arcp arcp" #pan (choose[0,1]),s "glitch*4 glitch" #n (irand 7),
+      s "~ arcp:1 arcp ~",s "909sd(5,8)" #pan (someCycles rev saw) #n (irand 20)]]
+  -- Elektron Monomachine
+  p "mnm"
+    $note "7(3,8,<0 2>)" #s "monomachine" #legato 0.75
+    |+ note ((choose[0,3,7]) + (choose[0,-12])) #midichan "[0,1]"

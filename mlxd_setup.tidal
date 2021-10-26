@@ -1,0 +1,36 @@
+let porttime_mxd = 5
+    hold_mxd = 64
+    -- Filter
+    cutoff_mxd = 43
+    resonance_mxd = 44
+    drive_mxd = 84
+    -- OSC
+    voice1_mxd = 50
+    voice2_mxd = 51
+    gain1_mxd = 39
+    gain2_mxd = 40
+    gain3_mxd = 33
+    -- CrossMod
+    mod_mxd = 41
+    syncmod_mxd = 80
+    ringmod_mxd = 81
+    -- LFO
+    lfo_mxd = 26
+    lforate_mxd = 24
+    -- FX
+    fxon_mxd = 92
+    fxtime_mxd = 28
+    fx_mxd = 29
+    fxtype_mxd = 88
+    fxsubtype_mxd = 96
+    delayon_mxd = 93
+    delaytime_mxd = 105
+    delayfb_mxd = 112
+    delay_mxd = 107
+    delaytype_mxd = 89
+    revon_mxd = 94
+    revtime_mxd = 114
+    reverb_mxd = 115
+    revtype_mxd = 90
+
+    
